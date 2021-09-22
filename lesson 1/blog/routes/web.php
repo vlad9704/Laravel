@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/lesson_1', function () {
+    $name = request('name');
+    $surname = request('surname');
+    return view('lesson_1', compact('name','surname'));
+});
+
+//Route::get('/posts/{id}', 'PostController@show'); variant one
+Route::get('/posts/{id}', PostController::class.'@show');
+
+
+
