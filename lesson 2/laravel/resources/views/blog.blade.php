@@ -1,6 +1,6 @@
 @extends('layout')
 
 @section('content')
-    <h1>About page</h1>
+    <h1>Блог</h1>
     @include('slider')
 @endsection

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', MainController::class.'@index')->name('index');
+Route::get('/about', MainController::class.'@about')->name('about');
+Route::get('/contact', MainController::class.'@contact')->name('contact');
+Route::get('/blog', MainController::class.'@blog')->name('blog');
 
 Route::get('/extends', function () {
     return view('extends');
 });
 
-Route::get('/about', function () {
-    return view('about');
-});
