@@ -21,6 +21,7 @@
                 <div class="card-footer text-muted">
                     <a href="#">{{$ship->class}}</a>
                 </div>
+                <h3>{{ $author->name }}</h3>
             </div>
 
         </div>
