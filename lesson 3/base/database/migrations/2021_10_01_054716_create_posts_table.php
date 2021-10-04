@@ -14,10 +14,10 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->text('description');
-            $table->integer('author_id')->unsigned(); // unsigned - исключить отрицательные значения
+            $table->unsignedBigInteger('author_id'); // unsigned - исключить отрицательные значения
             $table->integer('likes');
             $table->timestamps();
 
