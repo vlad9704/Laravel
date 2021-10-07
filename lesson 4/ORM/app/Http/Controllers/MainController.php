@@ -40,6 +40,13 @@ class MainController extends Controller
 
         // add to DB
 
+        // validation
+        request()->validate([
+            'title' => ['required', 'min:5', 'max:20'],
+            'description' => 'required',
+            'likes' => 'required | numeric',
+        ]);
+
         //dd(request()->all());
         /*$post = new post();
         $post->title = \request()->title;
