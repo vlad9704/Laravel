@@ -10,4 +10,9 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'description', 'likes'];
+
+    public function detail()
+    {
+        return $this->hasOne(PostDetail::class, 'post_id');
+    }
 }

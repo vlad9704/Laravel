@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostDetail;
 use Illuminate\Http\Request,
     Illuminate\Support\Facades\DB;
 
@@ -15,11 +16,10 @@ class MainController extends Controller
         return view('post.index', compact('posts'));
     }
 
-    public function show($id) {
-
-        $post = Post::findOrFail($id);
+    public function show(Post $post) {
 
         return view('post.show', compact('post'));
+
     }
 
     public function create() {
@@ -28,9 +28,7 @@ class MainController extends Controller
 
     }
 
-    public function edit($id) {
-
-        $post = Post::findOrFail($id);
+    public function edit(Post $post) {
 
         return view('post.edit', compact('post'));
 
@@ -40,60 +38,48 @@ class MainController extends Controller
 
         // add to DB
 
-        // validation
         request()->validate([
             'title' => ['required', 'min:5', 'max:20'],
             'description' => 'required',
             'likes' => 'required | numeric',
+            'full_description' => 'required',
         ]);
 
-        //dd(request()->all());
-        /*$post = new post();
-        $post->title = \request()->title;
-        $post->description = \request()->description;
-        $post->likes = \request()->likes;
-
-        $post->save(); // добавить в базу*/
-
-        // второй способ (дополнительно нужно указать в модели нужные параметры)
-        Post::create([
+       $post = Post::create([
             'title' => request()->title,
             'description' => request()->description,
             'likes' => request()->likes,
         ]);
 
+        PostDetail::create([
+            'full_description' => request()->full_description,
+            'post_id' => $post->id,
+        ]);
+
         return redirect(route('post.index'));
 
     }
 
-    public function destroy($id) {
+    public function destroy(Post $post) {
 
         // remove in DB
-        $post = Post::findOrFail($id)->delete();
+        $post->delete();
 
         return redirect(route('post.index'));
 
     }
 
-    public function update($id) {
+    public function update(Post $post) {
 
         // update in DB
 
-        /*$post = Post::findOrFail($id);
-
-        $post->title = \request()->title;
-        $post->description = \request()->description;
-        $post->likes = \request()->likes;
-
-        $post->save();*/
-
-        Post::findOrFail($id)->update([
-            'title' => \request()->title,
-            'description' => \request()->description,
-            'likes' => \request()->likes,
+        $post->update([
+            'title' => request()->title,
+            'description' => request()->description,
+            'likes' => request()->likes,
         ]);
 
-        return redirect(route('post.show', \request()->id));
+        return redirect(route('post.show', $post->id));
 
     }
 

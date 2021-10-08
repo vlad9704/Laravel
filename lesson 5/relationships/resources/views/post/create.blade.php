@@ -11,13 +11,6 @@
 
             <div class="col-xl">
                 <form method="POST" action="{{ route('post.create') }}">
-                    {{--
-
-                        @if($errors->has('title')) @endif
-
-                        @error('title') @enderror
-
-                    --}}
                     <div class="form-group">
                         <label for="inputTitle">Title</label>
                         <input value="{{ old('title') }}"
@@ -32,6 +25,11 @@
                         <label for="inputDesc">Description</label>
                         <textarea name="description" id="inputDesc" cols="30" rows="5" class = "form-control">{{ old('description') }}</textarea>
                         <p class="text-danger">{{ $errors->first('description') }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFullDesc">Full Description</label>
+                        <textarea name="full_description" id="inputFullDesc" cols="30" rows="5" class = "form-control">{{ old('full_description') }}</textarea>
+                        <p class="text-danger">{{ $errors->first('full_description') }}</p>
                     </div>
                     <div class="form-group">
                         <label for="inputLikes">Likes</label>

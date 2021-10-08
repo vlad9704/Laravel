@@ -14,6 +14,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{$post->title}}</h2>
                     <p class="card-text">{{$post->description}}</p>
+                    <p class="card-text">{{$post->detail->full_description}}</p>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on 1 July 2020

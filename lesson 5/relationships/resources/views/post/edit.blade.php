@@ -21,6 +21,10 @@
                         <textarea name="description" id="inputDesc" cols="30" rows="5" class = "form-control">{{ $post->description }}</textarea>
                     </div>
                     <div class="form-group">
+                        <label for="inputFullDesc">Full Description</label>
+                        <textarea name="full_description" id="inputFullDesc" cols="30" rows="5" class = "form-control">{{ $post->full_description }}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="inputLikes">Likes</label>
                         <input value="{{ $post->likes }}" type="number" class="form-control" id="inputLikes" placeholder="Likes" name = "likes">
                     </div>
