@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer {
+    margin-top: 50px;
+}
+
+input,
+textarea,
+button {
+    margin: 10px 0;
+}
