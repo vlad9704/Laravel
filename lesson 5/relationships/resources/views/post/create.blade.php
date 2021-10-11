@@ -35,6 +35,14 @@
                         <label for="inputLikes">Likes</label>
                         <input value="{{ old('likes') }}" type="number" class="form-control" id="inputLikes" placeholder="Likes" name = "likes">
                         <p class="text-danger">{{ $errors->first('likes') }}</p>
+                        <div class="form-group">
+                            <label for="inputTags">Tags</label>
+                            <select name="tags[]" id="inputTags" class="form-control" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

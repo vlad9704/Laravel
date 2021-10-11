@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\PostDetail;
+use App\Models\Tag;
 use Illuminate\Http\Request,
     Illuminate\Support\Facades\DB;
 
@@ -12,8 +14,9 @@ class MainController extends Controller
     public function index() {
 
         $posts = Post::all();
+        $tags = Tag::all();
 
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts', 'tags'));
     }
 
     public function show(Post $post) {
@@ -24,7 +27,9 @@ class MainController extends Controller
 
     public function create() {
 
-        return view('post.create');
+        $tags = Tag::all();
+
+        return view('post.create', compact('tags'));
 
     }
 
@@ -56,8 +61,43 @@ class MainController extends Controller
             'post_id' => $post->id,
         ]);
 
+        $post->tags()->attach(request()->tags);
+
         return redirect(route('post.index'));
 
+    }
+
+    public function storeComment(Post $post) {
+
+        request()->validate([
+           'author' => 'required',
+           'comment' => 'required',
+        ]);
+
+        //способ 2
+        $comment = new Comment([
+            'author' => request()->author,
+            'comment' => request()->comment,
+        ]);
+        $post->comments()->save($comment);
+
+        // способ 1
+        /*Comment::create([
+            'post_id' => $post->id,
+            'author' => request()->author,
+            'comment' => request()->comment,
+        ]);*/
+
+        return redirect(route('post.show', request('post_id')));
+
+    }
+
+    public function storeTag()
+    {
+        request()->validate(['name' => 'required']);
+        Tag::create(['name' => request()->name]);
+
+        return redirect(route('post.index'));
     }
 
     public function destroy(Post $post) {

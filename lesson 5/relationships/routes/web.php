@@ -23,3 +23,5 @@ Route::get('/posts/{post}', MainController::class.'@edit')->name('post.edit');
 Route::post('/posts', MainController::class.'@store')->name('post.store');
 Route::put('/posts/{post}', MainController::class.'@update')->name('post.update');
 Route::delete('/posts/{post}', MainController::class.'@destroy')->name('post.destroy');
+Route::post('/post/{post}/comments', MainController::class.'@storeComment')->name('post.comment.store');
+Route::post('/tags', MainController::class.'@storeTag')->name('tag.store');

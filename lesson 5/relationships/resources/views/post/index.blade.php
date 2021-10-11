@@ -24,15 +24,68 @@
                         </form>
                     </div>
                     <div class="card-footer text-muted">
-                        Posted on 1 July 2020
+                        Posted on {{ $post->created_at }}
                         <p>Likes: {{$post->likes}}</p>
+                        @foreach($post->tags as $tag)
+                            <a href="#">{{$tag->name}}</a>
+                        @endforeach
                     </div>
                 </div>
             @endforeach
         </div>
 
+        <div class="col-md-4 order-md-2 mb-4 mt-2">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Tags</h1>
+            </h4>
+            <ul class="list-group mb-3">
+                @foreach($tags as $tag)
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">{{$tag->name}}</h6>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tagModal">
+                add tag
+            </button>
+        </div>
+
     </div>
     <!-- /.row -->
+
+    <!-- Modal Tag -->
+    <div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add tag</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('tag.store', $post->name) }}" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputAuthor">name</label>
+                            <input
+                                type="text"
+                                class="form-control "
+                                id="inputAuthor"
+                                placeholder="name"
+                                name = "name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
 @endsection()
 
