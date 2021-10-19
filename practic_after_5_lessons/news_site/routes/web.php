@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', MainController::class.'@index')->name('index');
+Route::get('/ships', MainController::class.'@shipsList')->name('ships.list');
+Route::get('/ships/detail/{name}', MainController::class.'@shipsDetail')->name('ships.detail');
