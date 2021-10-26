@@ -10,14 +10,14 @@
                 <div class="col-lg-12">
                     <div class="row">
                         <!-- Blog post-->
-                        @foreach($ships as $ship)
+                        @foreach($posts as $post)
                             <div class="mb-4 col-lg-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="small text-muted">{{ $ship->launched }}</div>
-                                        <h2 class="card-title h4">{{ $ship->name }}</h2>
-                                        <p class="card-text">{{ $ship->class }}</p>
-                                        <a class="btn btn-secondary" href="{{ route('ships.detail', $ship->name) }}">Read more →</a>
+                                        <h2 class="card-title h4">{{ $post->title }}</h2>
+                                        <h6 class=" text-muted">{{ $post->description }}</h6>
+                                        <h4 class="card-text" style="color: lightseagreen">{{ $post->likes }}</h4>
+                                        <a class="btn btn-secondary" href="{{ route('post.detail', $post->id) }}">Read more →</a>
                                     </div>
                                 </div>
                             </div>
