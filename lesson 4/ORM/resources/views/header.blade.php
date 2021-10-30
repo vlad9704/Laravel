@@ -7,6 +7,12 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link {{ request()->route()->named('post.index') ? 'active' : '' }}" href="{{ route('post.index') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->route()->named('post.create') ? 'active' : '' }}" href="{{ route('post.create') }}">Create post</a></li>
+                <li class="nav-item">
+                    @guest
+                        <a class="nav-link" href="{{ url('/login') }}">Log in</a>
+                        <a class="nav-link" href="{{ url('/register') }}">Register</a>
+                    @endguest
+                </li>
             </ul>
         </div>
     </div>
