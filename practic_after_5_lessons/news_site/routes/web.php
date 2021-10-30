@@ -15,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', MainController::class.'@index')->name('index');
-Route::get('/ships', MainController::class.'@shipsList')->name('ships.list');
-Route::get('/ships/detail/{name}', MainController::class.'@shipsDetail')->name('ships.detail');
+Route::get('/posts', MainController::class.'@postsList')->name('posts.list');
+Route::get('/post/create', MainController::class.'@postCreate')->name('post.create');
+Route::get('/post/detail/{post}', MainController::class.'@postDetail')->name('post.detail');
+
+Route::post('/post/create', MainController::class.'@postSave')->name('post.save');
+Route::post('/post/detail/{post}', MainController::class.'@postComments')->name('post.comments');
+

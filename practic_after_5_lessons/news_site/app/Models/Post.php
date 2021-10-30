@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ship extends Model
+class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'class',
-        'launched'
+        'title',
+        'description',
+        'likes'
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
