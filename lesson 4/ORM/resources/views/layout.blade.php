@@ -11,6 +11,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
     <link href="{{asset('css/custom.css')}}" rel="stylesheet" />
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>

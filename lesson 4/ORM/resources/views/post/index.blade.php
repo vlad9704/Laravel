@@ -17,11 +17,13 @@
                         <h2 class="card-title">{{$post->title}}</h2>
                         <p class="card-text">{{$post->description}}</p>
                         <a target="" href="{{ route('post.show', ['id' => $post->id]) }}" class="btn btn-primary">Read More &rarr;</a>
-                        <a target="" href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-success">Edit &rarr;</a>
-                        <form method="POST" action="{{ route('post.destroy', $post->id) }}">
-                            @method('DELETE')
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </form>
+                        @auth
+                            <a target="" href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-success">Edit &rarr;</a>
+                            <form method="POST" action="{{ route('post.destroy', $post->id) }}">
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
+                        @endauth
                     </div>
                     <div class="card-footer text-muted">
                         Posted on 1 July 2020

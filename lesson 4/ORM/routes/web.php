@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', MainController::class.'@index')->name('post.index');
 Route::get('/post/{id}', MainController::class.'@show')->name('post.show');
-Route::get('/posts', MainController::class.'@create')->name('post.create');
+Route::get('/posts', MainController::class.'@create')->name('post.create')->middleware('auth');
 Route::get('/posts/{id}', MainController::class.'@edit')->name('post.edit');
 
 Route::post('/posts', MainController::class.'@store')->name('post.store');

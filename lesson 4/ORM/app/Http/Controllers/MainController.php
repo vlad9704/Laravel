@@ -8,6 +8,13 @@ use Illuminate\Http\Request,
 
 class MainController extends Controller
 {
+
+    // ограничение доступов
+    /*public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }*/
+
     public function index() {
 
         $posts = Post::all();
