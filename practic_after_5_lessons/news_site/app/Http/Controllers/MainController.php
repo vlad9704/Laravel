@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,7 +56,8 @@ class MainController extends Controller
 
     public function postDetail(Post $post)
     {
-        return view('posts.detail', compact('post'));
+        $posts = Post::all();
+        return view('posts.detail', compact('post', 'posts'));
     }
 
     public function postComments(Post $post)
@@ -71,6 +73,23 @@ class MainController extends Controller
             'comment' => request()->comment,
         ]);
         $post->comments()->save($comment);
+
+        return redirect(route('post.detail', request('post_id')));
+
+    }
+
+    public function postTags(Post $post) {
+
+        request()->validate([
+            'tag' => 'required | alpha',
+            'tags' => 'required',
+        ]);
+
+        Tag::create(['tag' => request()->tag]);
+
+        dd($post->first(), request()->tags);
+
+        $post->tags()->attach(request()->tags);
 
         return redirect(route('post.detail', request('post_id')));
 

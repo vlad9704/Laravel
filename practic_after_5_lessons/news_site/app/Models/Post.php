@@ -12,11 +12,19 @@ class Post extends Model
     protected $fillable = [
         'title',
         'description',
-        'likes'
+        'likes',
+        'tag',
+        'tags',
+        'post_id'
     ];
 
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags');
     }
 }

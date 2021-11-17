@@ -21,4 +21,5 @@ Route::get('/post/detail/{post}', MainController::class.'@postDetail')->name('po
 
 Route::post('/post/create', MainController::class.'@postSave')->name('post.save');
 Route::post('/post/detail/{post}', MainController::class.'@postComments')->name('post.comments');
+Route::post('/tags', MainController::class.'@postTags')->name('post.tags');
 
