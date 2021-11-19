@@ -16,15 +16,16 @@ class MainController extends Controller
     {
 
         $posts = Post::where('id', '<=', 6)->get();
+        $tags = Tag::all();
 
-        return view('index', compact('posts'));
+        return view('index', compact('posts', 'tags'));
 
     }
 
     public function postsList()
     {
 
-        $posts = DB::table('posts')->paginate(9);
+        $posts = DB::table('posts')->paginate(1);
 
         return view('posts.list', compact('posts'));
 
@@ -49,6 +50,8 @@ class MainController extends Controller
             'description' => request()->description,
             'likes' => request()->likes,
         ]);
+
+        //dd($post);
 
         return redirect('/');
 
@@ -82,14 +85,16 @@ class MainController extends Controller
 
         request()->validate([
             'tag' => 'required | alpha',
-            'tags' => 'required',
+            'heroes' => 'required',
         ]);
 
-        Tag::create(['tag' => request()->tag]);
+        $tag = Tag::create(['tag' => request()->tag]);
 
-        dd($post->first(), request()->tags);
-
-        $post->tags()->attach(request()->tags);
+        foreach( request('heroes') as $id )
+        {
+            $this_post = Post::where('id', '=', $id)->first();
+            $this_post->tags()->attach($tag->id);
+        }
 
         return redirect(route('post.detail', request('post_id')));
 

@@ -6,9 +6,9 @@
             <h1 style="font-style: italic; color: cadetblue">{{ $post->title.' ✟ '.$post->description }}</h1>
             <h5>Likes: <span style="font-weight: bold; color: brown">{{ $post->likes }}</span></h5>
             <h5>Tags:
-{{--                @foreach( $post->tags as $tag )--}}
-{{--                    #<span style="color: '#'.{{ str_random(6) }}">{{ $tag->tag }}</span>--}}
-{{--                @endforeach--}}
+                @foreach( $post->tags as $tag )
+                    #<span style="color: {{ sprintf('#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255)) }}">{{ $tag->tag }}</span>;
+                @endforeach
             </h5>
             <hr>
             <h1>Комментарии:</h1>
@@ -47,10 +47,10 @@
             <h5 style="color: cornsilk; background: cadetblue; display: inline-block; padding: 5px 10px; border-radius: 5px; margin: 10px 0">Добавить тэги</h5>
             <form method="POST" action="{{ route('post.tags', $post->id) }}">
                 @csrf
-                @if( $errors->has('tags') )
-                    <p class="text-danger">{{ $errors->first('tags') }}</p>
+                @if( $errors->has('heroes') )
+                    <p class="text-danger">{{ $errors->first('heroes') }}</p>
                 @endif
-                <select name="tags[]" id="tags" class="form-control" multiple>
+                <select name="heroes[]" id="heroes" class="form-control" multiple>
                     @foreach( $posts as $item )
                         <option value="{{ $item->id }}">{{ $item->title }}</option>
                     @endforeach
