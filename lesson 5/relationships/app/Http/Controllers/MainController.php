@@ -11,6 +11,13 @@ use Illuminate\Http\Request,
 
 class MainController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+        $this->middleware('checkUser', ['only' => ['create', 'store']]);
+    }
+
     public function index() {
 
         $posts = Post::all();
