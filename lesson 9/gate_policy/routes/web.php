@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('question.index'));
 });
+
+Route::get('/questions', QuestionController::class.'@index')->name('question.index');
+Route::get('/question/{question}', QuestionController::class.'@show')->name('question.show');
+
+Auth::routes();
+
+Route::get('/home', HomeController::class.'@index')->name('home');
